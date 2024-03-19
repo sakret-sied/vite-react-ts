@@ -1,26 +1,17 @@
 import { ButtonProps } from './Button.props';
-import style from './Button.module.css';
+import styles from './Button.module.css';
 
-function Button({ children, appearence = 'small', ...props }: ButtonProps) {
-  const getStyle = () => {
-    switch (appearence) {
-      case 'big':
-        return style.big;
-      case 'small':
-        return style.small;
-      default:
-        return '';
-    }
-  };
+function Button({
+  children,
+  appearence = 'small',
+  className = ''
+}: ButtonProps) {
+  let classes = `${styles.button} ${styles.accent}`;
+  classes += appearence === 'big' ? ` ${styles.big}` : '';
+  classes += appearence === 'small' ? ` ${styles.small}` : '';
+  classes += ` ${className}`;
 
-  return (
-    <button
-      className={`${style.button} ${style.accent} ${getStyle()}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
+  return <button className={classes}>{children}</button>;
 }
 
 export default Button;
