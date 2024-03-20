@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  appearence?: 'big' | 'small';
+  appearance?: 'big' | 'small';
 }

@@ -1,6 +1,7 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styles from './Layout.module.css';
 import Button from '../../components/Button/Button';
+import Menu from '../../components/Menu/Menu.tsx';
 
 function Layout() {
   return (
@@ -11,22 +12,13 @@ function Layout() {
           <div className={styles.name}>User Name</div>
           <div className={styles.email}>user@mail.com</div>
         </div>
-        <div className={styles.menu}>
-          <Link to="/" className={styles.link}>
-            <img src="/main-icon.svg" alt="Main icon" />
-            Main
-          </Link>
-          <Link to="/cart" className={styles.link}>
-            <img src="/cart-icon.svg" alt="Menu icon" />
-            Cart
-          </Link>
-        </div>
+        <Menu />
         <Button className={styles.exit}>
           <img src="/exit-icon.svg" alt="Exit icon" />
           Exit
         </Button>
       </div>
-      <div>
+      <div className={styles.content}>
         <Outlet />
       </div>
     </div>
