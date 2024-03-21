@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function ProductCard(props: ProductCardProps) {
   return (
-    <Link to={'/'} className={styles.link}>
+    <Link to={`/item/${props.id}`} className={styles.link}>
       <div className={styles.card}>
         <div
           className={styles.header}

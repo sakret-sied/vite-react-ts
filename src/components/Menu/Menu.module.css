@@ -16,6 +16,6 @@
   color: var(--primary-color);
 }
 
-.active {
+.link:global(.active) {
   color: var(--primary-color);
 }

@@ -2,16 +2,13 @@ import { NavLink } from 'react-router-dom';
 import styles from './Menu.module.css';
 
 function Menu() {
-  const navClass = ({ isActive }: { isActive: boolean }): string =>
-    `${styles.link} ${isActive ? styles.active : ''}`;
-
   return (
     <div className={styles.menu}>
-      <NavLink to="/" className={navClass}>
+      <NavLink to="/" className={styles.link}>
         <img src="/main-icon.svg" alt="Main icon" />
         Main
       </NavLink>
-      <NavLink to="/cart" className={navClass}>
+      <NavLink to="/cart" className={styles.link}>
         <img src="/cart-icon.svg" alt="Menu icon" />
         Cart
       </NavLink>
