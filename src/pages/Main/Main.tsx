@@ -1,21 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Item } from '../../interfaces/item.ts';
-import { getItems } from '../../services/api.items.ts';
 import Heading from '../../components/Heading/Heading.tsx';
-import ProductCard from '../../components/ProductCard/ProductCard.tsx';
 import Search from '../../components/Search/Search.tsx';
 import styles from './Main.module.css';
+import { useContentState } from '../../hooks/useContentState.ts';
+import ItemsList from '../../components/ItemsList/ItemsList.tsx';
 
 function Main() {
-  const [items, setItems] = useState<Item[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getItems()
-      .then((r) => setItems(r))
-      .finally(() => setIsLoading(false));
-  }, []);
+  const { items, isLoading, error } = useContentState();
 
   return (
     <>
@@ -24,19 +14,9 @@ function Main() {
         <Search placeholder="Enter food name" />
       </div>
       <div>
+        {error && <>{error}</>}
         {isLoading && <>Loading...</>}
-        {!isLoading &&
-          items.map((p) => (
-            <ProductCard
-              key={p.id}
-              id={p.id}
-              title={p.name}
-              description={p.ingredients.join(', ')}
-              rating={p.rating}
-              price={p.price}
-              image={p.image}
-            />
-          ))}
+        {!isLoading && <ItemsList items={items} />}
       </div>
     </>
   );
