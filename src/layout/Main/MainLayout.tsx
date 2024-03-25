@@ -1,10 +1,11 @@
+import { JSX } from 'react';
 import { Outlet } from 'react-router-dom';
-import styles from './Layout.module.css';
 import Button from '../../components/Button/Button';
-import Menu from '../../components/Menu/Menu.tsx';
-import User from '../../components/User/User.tsx';
+import Menu from '../../components/Menu/Menu';
+import User from '../../components/User/User';
+import styles from './MainLayout.module.css';
 
-function Layout() {
+function MainLayout(): JSX.Element {
   return (
     <div className={styles.layout}>
       <div className={styles.sidebar}>
@@ -22,4 +23,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default MainLayout;

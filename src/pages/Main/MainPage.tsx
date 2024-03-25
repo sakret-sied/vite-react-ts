@@ -1,10 +1,11 @@
-import Heading from '../../components/Heading/Heading.tsx';
-import Search from '../../components/Search/Search.tsx';
-import styles from './Main.module.css';
+import { JSX } from 'react';
 import { useContentState } from '../../hooks/useContentState.ts';
+import Heading from '../../components/Heading/Heading.tsx';
 import ItemsList from '../../components/ItemsList/ItemsList.tsx';
+import Search from '../../components/Search/Search.tsx';
+import styles from './MainPage.module.css';
 
-function Main() {
+function MainPage(): JSX.Element {
   const { items, isLoading, error } = useContentState();
 
   return (
@@ -22,4 +23,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MainPage;

@@ -1,8 +1,8 @@
+import { JSX, Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
 import { IItem } from '../../interfaces/Item.iterface.ts';
-import { JSX, Suspense } from 'react';
 
-function Item(): JSX.Element {
+function ItemPage(): JSX.Element {
   const { data } = useLoaderData() as { data: IItem };
 
   return (
@@ -12,4 +12,4 @@ function Item(): JSX.Element {
   );
 }
 
-export default Item;
+export default ItemPage;

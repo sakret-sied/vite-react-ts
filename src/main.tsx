@@ -1,19 +1,22 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
-import './index.css';
-import Cart from './pages/Cart/Cart.tsx';
-import Error from './pages/Error/Error.tsx';
-import Item from './pages/Item/Item.tsx';
-import Layout from './layout/Layout/Layout.tsx';
 import { getItemById } from './services/api.items.ts';
+import './index.css';
+import AuthLayout from './layout/Auth/AuthLayout.tsx';
+import MainLayout from './layout/Main/MainLayout.tsx';
+import CartPage from './pages/Cart/CartPage.tsx';
+import ErrorPage from './pages/Error/ErrorPage.tsx';
+import ItemPage from './pages/Item/ItemPage.tsx';
+import LoginPage from './pages/Login/LoginPage.tsx';
+import RegisterPage from './pages/Register/RegisterPage.tsx';
 
-const Main = lazy(() => import('./pages/Main/Main'));
+const Main = lazy(() => import('./pages/Main/MainPage.tsx'));
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <MainLayout />,
     children: [
       {
         path: '/',
@@ -24,20 +27,37 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: '/cart',
-        element: <Cart />
+        path: 'cart',
+        element: <CartPage />
       },
       {
-        path: '/item/:id',
-        element: <Item />,
+        path: 'item/:id',
+        element: <ItemPage />,
         errorElement: <>Error</>,
-        loader: ({ params }) => defer({ data: getItemById(Number(params.id)) })
+        loader: ({ params }) =>
+          defer({
+            data: getItemById(Number(params.id))
+          })
+      }
+    ]
+  },
+  {
+    path: '/auth',
+    element: <AuthLayout />,
+    children: [
+      {
+        path: 'login',
+        element: <LoginPage />
+      },
+      {
+        path: 'register',
+        element: <RegisterPage />
       }
     ]
   },
   {
     path: '*',
-    element: <Error />
+    element: <ErrorPage />
   }
 ]);
 
