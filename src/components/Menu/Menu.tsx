@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Menu.module.css';
+import { JSX } from 'react';
 
-function Menu() {
+function Menu(): JSX.Element {
   return (
     <div className={styles.menu}>
       <NavLink to="/" className={styles.link}>

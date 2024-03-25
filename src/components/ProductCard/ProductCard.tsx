@@ -1,8 +1,9 @@
 import styles from './ProductCard.module.css';
 import { ProductCardProps } from './ProductCard.props.ts';
 import { Link } from 'react-router-dom';
+import { JSX } from 'react';
 
-function ProductCard(props: ProductCardProps) {
+function ProductCard(props: ProductCardProps): JSX.Element {
   return (
     <Link to={`/item/${props.id}`} className={styles.link}>
       <div className={styles.card}>

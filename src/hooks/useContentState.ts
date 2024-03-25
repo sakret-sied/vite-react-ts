@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Item } from '../interfaces/Item.ts';
+import { IItem } from '../interfaces/Item.iterface.ts';
 import { getItems } from '../services/api.items.ts';
 import { ContentState } from '../interfaces/ContentState.ts';
+import {
+  ErrorState,
+  IsLoadingState,
+  ItemsState
+} from './useContentState.props.ts';
 
 export function useContentState(): ContentState {
-  const [items, setItems] = useState<Item[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
+  const [items, setItems]: ItemsState = useState<IItem[]>([]);
+  const [isLoading, setIsLoading]: IsLoadingState = useState<boolean>(false);
+  const [error, setError]: ErrorState = useState<string>('');
 
-  useEffect(() => {
+  useEffect((): void => {
     setError('');
     setIsLoading(true);
     getItems()
-      .then((r) => setItems(r))
+      .then((r: IItem[]) => setItems(r))
       .catch((e) => setError(e.message))
       .finally(() => setIsLoading(false));
   }, []);

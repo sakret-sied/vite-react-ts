@@ -1,5 +1,5 @@
-import { Item } from '../../interfaces/Item.ts';
+import { IItem } from '../../interfaces/Item.iterface.ts';
 
 export interface ItemsListProps {
-  items: Item[];
+  items: IItem[];
 }

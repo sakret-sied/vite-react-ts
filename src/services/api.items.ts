@@ -1,14 +1,27 @@
 import axios from 'axios';
-import { Item } from '../interfaces/Item.ts';
+import { IItem } from '../interfaces/Item.iterface.ts';
 
 export const PREFIX = 'https://purpleschool.ru/pizza-api-demo';
 
-export const getItems = async () => {
-  await new Promise<void>((resolve) => {
-    setTimeout(() => {
+const timer = async (seconds: number): Promise<void> =>
+  new Promise<void>((resolve): void => {
+    setTimeout((): void => {
       resolve();
-    }, 2000);
+    }, seconds * 1000);
   });
-  const { data } = await axios.get<Item[]>(`${PREFIX}/products`);
+
+export const getItems = async (): Promise<IItem[]> => {
+  await timer(2);
+  const { data }: { data: IItem[] } = await axios.get<IItem[]>(
+    `${PREFIX}/products`
+  );
+  return data;
+};
+
+export const getItemById = async (id: number): Promise<IItem> => {
+  await timer(2);
+  const { data }: { data: IItem } = await axios.get<IItem>(
+    `${PREFIX}/products/${id}`
+  );
   return data;
 };

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
 import './index.css';
 import Cart from './pages/Cart/Cart.tsx';
 import Error from './pages/Error/Error.tsx';
 import Item from './pages/Item/Item.tsx';
 import Layout from './layout/Layout/Layout.tsx';
-import Main from './pages/Main/Main.tsx';
+import { getItemById } from './services/api.items.ts';
+
+const Main = lazy(() => import('./pages/Main/Main'));
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Main />
+        element: (
+          <Suspense fallback={<>Loading...</>}>
+            <Main />
+          </Suspense>
+        )
       },
       {
         path: '/cart',
@@ -23,7 +29,9 @@ const router = createBrowserRouter([
       },
       {
         path: '/item/:id',
-        element: <Item />
+        element: <Item />,
+        errorElement: <>Error</>,
+        loader: ({ params }) => defer({ data: getItemById(Number(params.id)) })
       }
     ]
   },
@@ -32,6 +40,8 @@ const router = createBrowserRouter([
     element: <Error />
   }
 ]);
+
+export default Main;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
