@@ -1,4 +1,4 @@
-export interface IItem {
+export interface ItemAPI {
   id: number;
   name: string;
   price: number;

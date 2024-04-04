@@ -15,9 +15,8 @@ function MainPage(): JSX.Element {
         <Search placeholder="Enter food name" />
       </div>
       <div>
-        {error && <>{error}</>}
-        {isLoading && <>Loading...</>}
-        {!isLoading && <ItemsList items={items} />}
+        {error ? <>{error}</> : ''}
+        {isLoading ? <>Loading...</> : <ItemsList items={items} />}
       </div>
     </>
   );

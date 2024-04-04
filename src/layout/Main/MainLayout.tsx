@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { Outlet } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import Logout from '../../components/Logout/Logout.tsx';
 import Menu from '../../components/Menu/Menu';
 import User from '../../components/User/User';
 import styles from './MainLayout.module.css';
@@ -11,10 +11,7 @@ function MainLayout(): JSX.Element {
       <div className={styles.sidebar}>
         <User />
         <Menu />
-        <Button className={styles.exit}>
-          <img src="/exit-icon.svg" alt="Exit icon" />
-          Exit
-        </Button>
+        <Logout />
       </div>
       <div className={styles.content}>
         <Outlet />

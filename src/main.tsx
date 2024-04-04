@@ -1,7 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
-import { getItemById } from './services/api.items.ts';
+import { getItemById } from './services/API.ts';
+import { RequireAuth } from './services/RequireAuth.tsx';
+import { store } from './store/store.ts';
 import './index.css';
 import AuthLayout from './layout/Auth/AuthLayout.tsx';
 import MainLayout from './layout/Main/MainLayout.tsx';
@@ -16,7 +19,11 @@ const Main = lazy(() => import('./pages/Main/MainPage.tsx'));
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: (
+      <RequireAuth>
+        <MainLayout />
+      </RequireAuth>
+    ),
     children: [
       {
         path: '/',
@@ -65,6 +72,8 @@ export default Main;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

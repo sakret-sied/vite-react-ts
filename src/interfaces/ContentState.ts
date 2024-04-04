@@ -1,7 +1,7 @@
-import { IItem } from './Item.iterface.ts';
+import { ItemAPI } from './ItemAPI.ts';
 
 export interface ContentState {
-  items: IItem[];
+  items: ItemAPI[];
   isLoading: boolean;
   error: string;
 }

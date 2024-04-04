@@ -1,9 +1,9 @@
 import React from 'react';
-import { IItem } from '../interfaces/Item.iterface.ts';
+import { ItemAPI } from '../interfaces/ItemAPI.ts';
 
 export type ItemsState = [
-  IItem[],
-  React.Dispatch<React.SetStateAction<IItem[]>>
+  ItemAPI[],
+  React.Dispatch<React.SetStateAction<ItemAPI[]>>
 ];
 
 export type IsLoadingState = [
