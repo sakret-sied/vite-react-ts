@@ -1,8 +1,8 @@
-import styles from './User.module.css';
 import { JSX, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store.ts';
-import { profileThunk } from '../../store/user.slice.ts';
+import { profileThunk } from '../../store/user.thunks.ts';
+import styles from './User.module.css';
 
 function User(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();

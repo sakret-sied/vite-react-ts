@@ -1,4 +1,4 @@
-import { ItemAPI } from './ResponseAPI.ts';
+import { ItemAPI } from './API.ts';
 
 export interface ContentState {
   items: ItemAPI[];

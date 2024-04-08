@@ -20,3 +20,7 @@ export interface ProfileAPI {
   restoreToken: null;
   phone: string;
 }
+
+export interface ActionAPI<T, E> {
+  (fields: T): Promise<E>;
+}

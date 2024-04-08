@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ItemAPI } from '../interfaces/ResponseAPI.ts';
+import { ItemAPI } from '../interfaces/API.ts';
 import { getItemsAction } from '../services/API.ts';
 import { ContentState } from '../interfaces/ContentState.ts';
 import {

@@ -1,8 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loadState } from './storage.ts';
-import { loginAction, profileAction } from '../services/API.ts';
-import { AxiosError } from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 import { UserState } from '../interfaces/UserState.ts';
+import { loadState } from './storage.ts';
+import { loginThunk, profileThunk, registerThunk } from './user.thunks.ts';
 
 export const JWT_KEY = 'jwt';
 
@@ -11,32 +10,6 @@ const initialState: UserState = {
   error: null,
   profile: null
 };
-
-export const loginThunk = createAsyncThunk(
-  'user/login',
-  async (params: { email: string; password: string }) => {
-    try {
-      return await loginAction(params.email, params.password);
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        throw new Error(e.response?.data.message);
-      }
-    }
-  }
-);
-
-export const profileThunk = createAsyncThunk(
-  'user/profile',
-  async (params: { jwt: string | null }) => {
-    try {
-      return await profileAction(params.jwt);
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        throw new Error(e.response?.data.message);
-      }
-    }
-  }
-);
 
 export const userSlice = createSlice({
   name: 'user',
@@ -50,21 +23,31 @@ export const userSlice = createSlice({
     }
   },
   extraReducers: (builder): void => {
-    builder.addCase(loginThunk.fulfilled, (state, action): void => {
-      if (!action.payload) {
-        return;
-      }
-      state[JWT_KEY] = action.payload.access_token;
-    });
-    builder.addCase(loginThunk.rejected, (state, action): void => {
-      state.error = action.error.message ?? null;
-    });
-    builder.addCase(profileThunk.fulfilled, (state, action): void => {
-      if (!action.payload) {
-        return;
-      }
-      state.profile = action.payload;
-    });
+    builder
+      .addCase(loginThunk.fulfilled, (state, action): void => {
+        if (!action.payload) {
+          return;
+        }
+        state[JWT_KEY] = action.payload.access_token;
+      })
+      .addCase(loginThunk.rejected, (state, action): void => {
+        state.error = action.error.message ?? null;
+      })
+      .addCase(profileThunk.fulfilled, (state, action): void => {
+        if (!action.payload) {
+          return;
+        }
+        state.profile = action.payload;
+      })
+      .addCase(registerThunk.fulfilled, (state, action): void => {
+        if (!action.payload) {
+          return;
+        }
+        state[JWT_KEY] = action.payload.access_token;
+      })
+      .addCase(registerThunk.rejected, (state, action): void => {
+        state.error = action.error.message ?? null;
+      });
   }
 });
 
