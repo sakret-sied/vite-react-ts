@@ -1,69 +1,55 @@
 import axios from 'axios';
-import { ActionAPI, ItemAPI, ProfileAPI, TokenAPI } from '../interfaces/API.ts';
+import { ItemAPI, ProfileAPI, TokenAPI } from '../interfaces/API.ts';
 import { RegisterFields } from '../interfaces/RegisterForm.ts';
 import { LoginFields } from '../interfaces/LoginForm.ts';
 import { ProfileFields } from '../interfaces/Profile.ts';
+import { AxiosMethod } from '../enums/AxiosMethod.ts';
 
 export const PREFIX = 'https://purpleschool.ru/pizza-api-demo';
 
-const timer = async (seconds: number): Promise<void> =>
-  new Promise<void>((resolve): void => {
+async function timer(seconds: number): Promise<void> {
+  return new Promise<void>((resolve): void => {
     setTimeout((): void => {
       resolve();
     }, seconds * 1000);
   });
+}
 
-export const getItemsAction = async (): Promise<ItemAPI[]> => {
-  await timer(1.5);
-  const { data }: { data: ItemAPI[] } = await axios.get<ItemAPI[]>(
-    `${PREFIX}/products`
-  );
+async function baseAction<P, R>(
+  url: string,
+  params: P | undefined = undefined,
+  method: AxiosMethod = AxiosMethod.get,
+  secondsDelay: number = 0.2
+): Promise<R> {
+  await timer(secondsDelay);
+  const { data } = await axios[method]<R>(`${PREFIX}${url}`, params);
   return data;
-};
+}
 
-export const getItemByIdAction = async (id: number): Promise<ItemAPI> => {
-  await timer(1.5);
-  const { data }: { data: ItemAPI } = await axios.get<ItemAPI>(
-    `${PREFIX}/products/${id}`
-  );
-  return data;
-};
+export function getItemsAction() {
+  return baseAction<undefined, ItemAPI[]>('/products');
+}
 
-export const loginAction: ActionAPI<LoginFields, TokenAPI | undefined> = async (
-  fields: LoginFields
-): Promise<TokenAPI | undefined> => {
-  await timer(1.5);
-  const { data }: { data: TokenAPI } = await axios.post<TokenAPI>(
-    `${PREFIX}/auth/login`,
-    fields
-  );
-  return data;
-};
+export function getItemByIdAction(id: number) {
+  return baseAction<undefined, ItemAPI>(`/products/${id}`);
+}
 
-export const registerAction: ActionAPI<
-  RegisterFields,
-  TokenAPI | undefined
-> = async (fields: RegisterFields): Promise<TokenAPI> => {
-  await timer(0.2);
-  const { data }: { data: TokenAPI } = await axios.post<TokenAPI>(
-    `${PREFIX}/auth/register`,
-    fields
+export function loginAction(fields: LoginFields) {
+  return baseAction<LoginFields, TokenAPI>(
+    `/auth/login`,
+    fields,
+    AxiosMethod.post
   );
-  return data;
-};
+}
 
-export const profileAction: ActionAPI<
-  ProfileFields,
-  ProfileAPI | undefined
-> = async (fields: ProfileFields): Promise<ProfileAPI> => {
-  await timer(0.2);
-  const { data }: { data: ProfileAPI } = await axios.get<ProfileAPI>(
-    `${PREFIX}/user/profile`,
-    {
-      headers: {
-        Authorization: `Bearer ${fields.jwt}`
-      }
-    }
+export function registerAction(fields: RegisterFields) {
+  return baseAction<RegisterFields, TokenAPI>(
+    `/auth/register`,
+    fields,
+    AxiosMethod.post
   );
-  return data;
-};
+}
+
+export function profileAction(fields: ProfileFields) {
+  return baseAction<ProfileFields, ProfileAPI>(`/user/profile`, fields);
+}

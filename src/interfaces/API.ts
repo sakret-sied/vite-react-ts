@@ -21,6 +21,6 @@ export interface ProfileAPI {
   phone: string;
 }
 
-export interface ActionAPI<T, E> {
-  (fields: T): Promise<E>;
+export interface ActionAPI<F, R> {
+  (fields: F): Promise<R>;
 }

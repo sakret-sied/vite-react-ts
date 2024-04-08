@@ -8,7 +8,7 @@ function User(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const { jwt, profile } = useSelector((state: RootState) => state.user);
   useEffect((): void => {
-    dispatch(profileThunk({ jwt }));
+    dispatch(profileThunk({ headers: { Authorization: `Bearer ${jwt}` } }));
   }, [dispatch, jwt]);
 
   return (

@@ -6,8 +6,8 @@ import { ProfileFields } from '../interfaces/Profile.ts';
 import { RegisterFields } from '../interfaces/RegisterForm.ts';
 import { loginAction, profileAction, registerAction } from '../services/API.ts';
 
-const basicThunk = <T, E>(prefix: string, func: ActionAPI<T, E>) =>
-  createAsyncThunk(prefix, async (params: T) => {
+const basicThunk = <P, R>(prefix: string, func: ActionAPI<P, R>) =>
+  createAsyncThunk<R | undefined, P>(prefix, async (params: P) => {
     try {
       return await func(params);
     } catch (e) {
@@ -17,17 +17,17 @@ const basicThunk = <T, E>(prefix: string, func: ActionAPI<T, E>) =>
     }
   });
 
-export const loginThunk = basicThunk<LoginFields, TokenAPI | undefined>(
+export const loginThunk = basicThunk<LoginFields, TokenAPI>(
   'user/login',
   loginAction
 );
 
-export const registerThunk = basicThunk<RegisterFields, TokenAPI | undefined>(
+export const registerThunk = basicThunk<RegisterFields, TokenAPI>(
   'user/register',
   registerAction
 );
 
-export const profileThunk = basicThunk<ProfileFields, ProfileAPI | undefined>(
+export const profileThunk = basicThunk<ProfileFields, ProfileAPI>(
   'user/profile',
   profileAction
 );
