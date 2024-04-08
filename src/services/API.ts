@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { ItemAPI } from '../interfaces/ItemAPI.ts';
-import { AuthToken } from '../types/AuthToken.ts';
+import { ItemAPI, ProfileAPI, TokenAPI } from '../interfaces/ResponseAPI.ts';
 
 export const PREFIX = 'https://purpleschool.ru/pizza-api-demo';
 
@@ -11,7 +10,7 @@ const timer = async (seconds: number): Promise<void> =>
     }, seconds * 1000);
   });
 
-export const getItems = async (): Promise<ItemAPI[]> => {
+export const getItemsAction = async (): Promise<ItemAPI[]> => {
   await timer(1.5);
   const { data }: { data: ItemAPI[] } = await axios.get<ItemAPI[]>(
     `${PREFIX}/products`
@@ -19,7 +18,7 @@ export const getItems = async (): Promise<ItemAPI[]> => {
   return data;
 };
 
-export const getItemById = async (id: number): Promise<ItemAPI> => {
+export const getItemByIdAction = async (id: number): Promise<ItemAPI> => {
   await timer(1.5);
   const { data }: { data: ItemAPI } = await axios.get<ItemAPI>(
     `${PREFIX}/products/${id}`
@@ -27,16 +26,31 @@ export const getItemById = async (id: number): Promise<ItemAPI> => {
   return data;
 };
 
-export const login = async (
+export const loginAction = async (
   email: string,
   password: string
-): Promise<AuthToken> => {
-  await timer(0.2);
-  const { data }: { data: AuthToken } = await axios.post<AuthToken>(
+): Promise<TokenAPI | undefined> => {
+  await timer(1.5);
+  const { data }: { data: TokenAPI } = await axios.post<TokenAPI>(
     `${PREFIX}/auth/login`,
     {
       email,
       password
+    }
+  );
+  return data;
+};
+
+export const profileAction = async (
+  token: string | null
+): Promise<ProfileAPI> => {
+  await timer(0.2);
+  const { data }: { data: ProfileAPI } = await axios.get<ProfileAPI>(
+    `${PREFIX}/user/profile`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }
   );
   return data;

@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
-import { getItemById } from './services/API.ts';
+import { getItemByIdAction } from './services/API.ts';
 import { RequireAuth } from './services/RequireAuth.tsx';
 import { store } from './store/store.ts';
 import './index.css';
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         errorElement: <>Error</>,
         loader: ({ params }) =>
           defer({
-            data: getItemById(Number(params.id))
+            data: getItemByIdAction(Number(params.id))
           })
       }
     ]

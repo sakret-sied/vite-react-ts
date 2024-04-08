@@ -1,6 +1,6 @@
 import ProductCard from '../ProductCard/ProductCard.tsx';
 import { ItemsListProps } from './ItemsList.props.ts';
-import { ItemAPI } from '../../interfaces/ItemAPI.ts';
+import { ItemAPI } from '../../interfaces/ResponseAPI.ts';
 import styles from './ItemList.module.css';
 import { JSX } from 'react';
 

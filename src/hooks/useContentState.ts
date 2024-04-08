@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ItemAPI } from '../interfaces/ItemAPI.ts';
-import { getItems } from '../services/API.ts';
+import { ItemAPI } from '../interfaces/ResponseAPI.ts';
+import { getItemsAction } from '../services/API.ts';
 import { ContentState } from '../interfaces/ContentState.ts';
 import {
   ErrorState,
@@ -16,7 +16,7 @@ export function useContentState(): ContentState {
   useEffect((): void => {
     setError('');
     setIsLoading(true);
-    getItems()
+    getItemsAction()
       .then((r: ItemAPI[]) => setItems(r))
       .catch((e) => setError(e.message))
       .finally(() => setIsLoading(false));

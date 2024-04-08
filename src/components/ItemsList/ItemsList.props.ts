@@ -1,4 +1,4 @@
-import { ItemAPI } from '../../interfaces/ItemAPI.ts';
+import { ItemAPI } from '../../interfaces/ResponseAPI.ts';
 
 export interface ItemsListProps {
   items: ItemAPI[];

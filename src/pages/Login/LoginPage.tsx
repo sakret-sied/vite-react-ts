@@ -1,38 +1,39 @@
-import { JSX, useState } from 'react';
+import { JSX, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginFormEvent } from '../../interfaces/LoginFormEvent.ts';
-import { login } from '../../services/API.ts';
-import styles from './LoginPage.module.css';
+import { AppDispatch, RootState } from '../../store/store.ts';
+import { JWT_KEY, loginThunk, userActions } from '../../store/user.slice.ts';
 import Button from '../../components/Button/Button.tsx';
 import Heading from '../../components/Heading/Heading.tsx';
 import Input from '../../components/Input/Input.tsx';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store.ts';
-import { userActions } from '../../store/user.slice.ts';
-import { AuthToken } from '../../types/AuthToken.ts';
+import styles from './LoginPage.module.css';
 
 function LoginPage(): JSX.Element {
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const { [JWT_KEY]: jwt, error } = useSelector((s: RootState) => s.user);
 
-  const submit = async (e: LoginFormEvent<HTMLFormElement>): Promise<void> => {
+  useEffect((): void => {
+    if (jwt) {
+      navigate('/');
+    }
+  }, [jwt, navigate]);
+
+  const submitHandler = async (
+    e: LoginFormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    setError(null);
+    dispatch(userActions.clearError());
     const { email, password } = e.target;
-    login(email.value, password.value)
-      .then((data: AuthToken) =>
-        dispatch(userActions.addJwt(data.access_token))
-      )
-      .then(() => navigate('/'))
-      .catch((e) => setError(e.response?.data.message));
+    dispatch(loginThunk({ email: email.value, password: password.value }));
   };
 
   return (
     <div className={styles.login}>
       <Heading>Вход</Heading>
       {error ? <div className={styles.error}>{error}</div> : ''}
-      <form className={styles.form} onSubmit={submit}>
+      <form className={styles.form} onSubmit={submitHandler}>
         <div className={styles.field}>
           <label htmlFor="email">Ваш email</label>
           <Input

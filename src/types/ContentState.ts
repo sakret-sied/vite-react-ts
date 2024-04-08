@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItemAPI } from '../interfaces/ItemAPI.ts';
+import { ItemAPI } from '../interfaces/ResponseAPI.ts';
 
 export type ItemsState = [
   ItemAPI[],
