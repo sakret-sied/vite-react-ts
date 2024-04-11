@@ -12,3 +12,8 @@ export type IsLoadingState = [
 ];
 
 export type ErrorState = [string, React.Dispatch<React.SetStateAction<string>>];
+
+export type FilterState = [
+  string,
+  React.Dispatch<React.SetStateAction<string>>
+];
