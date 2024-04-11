@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom';
-import styles from './Menu.module.css';
 import { JSX } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store.ts';
+import styles from './Menu.module.css';
 
 function Menu(): JSX.Element {
   const items = useSelector((s: RootState) => s.cart.items);
@@ -15,7 +15,10 @@ function Menu(): JSX.Element {
       </NavLink>
       <NavLink to="/cart" className={styles.link}>
         <img src="/cart-icon.svg" alt="Menu icon" />
-        Cart {items.reduce((acc, item) => acc + item.count, 0)}
+        Cart{' '}
+        <span className={styles.cartCount}>
+          {items.reduce((acc, item) => acc + item.count, 0)}
+        </span>
       </NavLink>
     </div>
   );

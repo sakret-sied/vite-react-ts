@@ -23,7 +23,13 @@ function MainPage(): JSX.Element {
       </div>
       <div>
         {error ? <>{error}</> : ''}
-        {isLoading ? <>Loading...</> : <ItemsList items={items} />}
+        {isLoading ? (
+          <>Loading...</>
+        ) : items.length === 0 ? (
+          <>Not found</>
+        ) : (
+          <ItemsList items={items} />
+        )}
       </div>
     </>
   );
