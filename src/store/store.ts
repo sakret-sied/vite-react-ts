@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { saveState } from './storage.ts';
-import cartSlice from './cart.slice.ts';
+import cartSlice, { CART_KEY } from './cart.slice.ts';
 import userSlice, { JWT_KEY } from './user.slice.ts';
 
 export const store = configureStore({
@@ -12,6 +12,7 @@ export const store = configureStore({
 
 store.subscribe(() => {
   saveState({ [JWT_KEY]: store.getState().user[JWT_KEY] }, JWT_KEY);
+  saveState(store.getState().cart, CART_KEY);
 });
 
 export type RootState = ReturnType<typeof store.getState>;

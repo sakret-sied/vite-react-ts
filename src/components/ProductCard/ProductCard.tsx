@@ -1,4 +1,4 @@
-import { JSX, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ProductCardProps } from './ProductCard.props.ts';
@@ -6,7 +6,7 @@ import { AppDispatch } from '../../store/store.ts';
 import { cartActions } from '../../store/cart.slice.ts';
 import styles from './ProductCard.module.css';
 
-function ProductCard(props: ProductCardProps): JSX.Element {
+function ProductCard(props: ProductCardProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   const addHandler = (e: MouseEvent) => {

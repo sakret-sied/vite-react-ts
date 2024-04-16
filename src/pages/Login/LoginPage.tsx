@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginEvent } from '../../interfaces/LoginForm.ts';
@@ -11,7 +10,7 @@ import Input from '../../components/Input/Input.tsx';
 import styles from './LoginPage.module.css';
 import { useLoginCheck } from '../../hooks/useLoginCheck.ts';
 
-function LoginPage(): JSX.Element {
+function LoginPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { error } = useSelector((s: RootState) => s.user);
   useLoginCheck();

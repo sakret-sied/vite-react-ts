@@ -1,6 +1,4 @@
-import { JSX } from 'react';
-
-function ErrorPage(): JSX.Element {
+function ErrorPage() {
   return <>Error Page</>;
 }
 

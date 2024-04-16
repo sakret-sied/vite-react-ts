@@ -1,11 +1,11 @@
-import { ChangeEvent, JSX } from 'react';
+import { ChangeEvent } from 'react';
 import { useContentState } from '../../hooks/useContentState.ts';
 import Heading from '../../components/Heading/Heading.tsx';
 import ItemsList from '../../components/ItemsList/ItemsList.tsx';
 import Search from '../../components/Search/Search.tsx';
 import styles from './MainPage.module.css';
 
-function MainPage(): JSX.Element {
+function MainPage() {
   const { items, isLoading, error, filter, setFilter } = useContentState();
   const filterHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);

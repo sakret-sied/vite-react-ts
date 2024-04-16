@@ -1,10 +1,9 @@
-import { JSX } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store.ts';
 import styles from './Menu.module.css';
 
-function Menu(): JSX.Element {
+function Menu() {
   const items = useSelector((s: RootState) => s.cart.items);
 
   return (

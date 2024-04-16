@@ -1,8 +1,8 @@
-import { JSX, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
 import { ItemAPI } from '../../interfaces/API.ts';
 
-function ItemPage(): JSX.Element {
+function ItemPage() {
   const { data } = useLoaderData() as { data: ItemAPI };
 
   return (

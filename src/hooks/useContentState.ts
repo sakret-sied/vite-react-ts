@@ -15,7 +15,7 @@ export function useContentState(): ContentState {
   const [error, setError]: ErrorState = useState<string>('');
   const [filter, setFilter]: FilterState = useState<string>('');
 
-  useEffect((): void => {
+  useEffect(() => {
     setError('');
     setIsLoading(true);
     getItemsAction(filter)

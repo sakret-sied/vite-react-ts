@@ -5,5 +5,5 @@ export interface ContentState {
   isLoading: boolean;
   error: string;
   filter: string;
-  setFilter(name: string): void;
+  setFilter(name: string);
 }

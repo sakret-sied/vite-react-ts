@@ -8,7 +8,7 @@ export function useLoginCheck() {
   const navigate = useNavigate();
   const { [JWT_KEY]: jwt } = useSelector((s: RootState) => s.user);
 
-  useEffect((): void => {
+  useEffect(() => {
     if (jwt) {
       navigate('/');
     }

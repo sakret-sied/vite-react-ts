@@ -9,8 +9,8 @@ import { AxiosMethods } from '../types/AxiosMethods.ts';
 export const PREFIX = 'https://purpleschool.ru/pizza-api-demo';
 
 async function timer(seconds: number): Promise<void> {
-  return new Promise<void>((resolve): void => {
-    setTimeout((): void => {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
       resolve();
     }, seconds * 1000);
   });

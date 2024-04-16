@@ -6,7 +6,7 @@ import { loginThunk, profileThunk, registerThunk } from './user.thunks.ts';
 export const JWT_KEY = 'jwt';
 
 const initialState: UserState = {
-  [JWT_KEY]: loadState<UserState>(JWT_KEY)?.[JWT_KEY] ?? null,
+  jwt: loadState<UserState>(JWT_KEY)?.jwt ?? null,
   error: null,
   profile: null
 };
@@ -15,37 +15,37 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logout: (state): void => {
+    logout: (state) => {
       state[JWT_KEY] = null;
     },
-    clearError: (state): void => {
+    clearError: (state) => {
       state.error = null;
     }
   },
-  extraReducers: (builder): void => {
+  extraReducers: (builder) => {
     builder
-      .addCase(loginThunk.fulfilled, (state, action): void => {
+      .addCase(loginThunk.fulfilled, (state, action) => {
         if (!action.payload) {
           return;
         }
         state[JWT_KEY] = action.payload.access_token;
       })
-      .addCase(loginThunk.rejected, (state, action): void => {
+      .addCase(loginThunk.rejected, (state, action) => {
         state.error = action.error.message ?? null;
       })
-      .addCase(profileThunk.fulfilled, (state, action): void => {
+      .addCase(profileThunk.fulfilled, (state, action) => {
         if (!action.payload) {
           return;
         }
         state.profile = action.payload;
       })
-      .addCase(registerThunk.fulfilled, (state, action): void => {
+      .addCase(registerThunk.fulfilled, (state, action) => {
         if (!action.payload) {
           return;
         }
         state[JWT_KEY] = action.payload.access_token;
       })
-      .addCase(registerThunk.rejected, (state, action): void => {
+      .addCase(registerThunk.rejected, (state, action) => {
         state.error = action.error.message ?? null;
       });
   }

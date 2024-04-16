@@ -1,13 +1,13 @@
-import { JSX, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store.ts';
 import { profileThunk } from '../../store/user.thunks.ts';
 import styles from './User.module.css';
 
-function User(): JSX.Element {
+function User() {
   const dispatch = useDispatch<AppDispatch>();
   const { jwt, profile } = useSelector((state: RootState) => state.user);
-  useEffect((): void => {
+  useEffect(() => {
     dispatch(profileThunk({ headers: { Authorization: `Bearer ${jwt}` } }));
   }, [dispatch, jwt]);
 

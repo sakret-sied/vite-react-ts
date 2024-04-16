@@ -11,7 +11,7 @@ export function loadState<T>(key: string): T | null {
   }
 }
 
-export function saveState<T>(state: T, key: string): void {
+export function saveState<T>(state: T, key: string) {
   const stringState: string = JSON.stringify(state);
   localStorage.setItem(key, stringState);
 }
