@@ -13,7 +13,7 @@ function Logout() {
 
   return (
     <Button className={styles.exit} onClick={logoutHandler}>
-      <img src="/exit-icon.svg" alt="Exit icon" />
+      <img src="/exit-icon.svg" alt="Exit" />
       Exit
     </Button>
   );

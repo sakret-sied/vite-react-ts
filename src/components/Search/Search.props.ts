@@ -1,11 +1,11 @@
 import React, { InputHTMLAttributes, RefAttributes } from 'react';
-import { InputProps } from '../Input/Input.props.ts';
+import { IInputProps } from '../Input/Input.props.ts';
 
-export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface ISearchProps extends InputHTMLAttributes<HTMLInputElement> {
   isValid?: boolean;
 }
 
-export interface SearchType
+export interface ISearchType
   extends React.ForwardRefExoticComponent<
-    InputProps & RefAttributes<HTMLInputElement>
+    IInputProps & RefAttributes<HTMLInputElement>
   > {}

@@ -1,12 +1,12 @@
 import { FormEvent } from 'react';
 
-export interface RegisterFields {
+export interface IRegisterFields {
   email: string;
   name: string;
   password: string;
 }
 
-export interface RegisterEventValues {
+export interface IRegisterEventValues {
   email: {
     value: string;
   };
@@ -18,6 +18,6 @@ export interface RegisterEventValues {
   };
 }
 
-export interface RegisterEvent<T = Element> extends FormEvent<T> {
-  target: EventTarget & RegisterEventValues;
+export interface IRegisterEvent<T = Element> extends FormEvent<T> {
+  target: EventTarget & IRegisterEventValues;
 }

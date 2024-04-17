@@ -9,11 +9,11 @@ function Menu() {
   return (
     <div className={styles.menu}>
       <NavLink to="/" className={styles.link}>
-        <img src="/main-icon.svg" alt="Main icon" />
+        <img src="/main-icon.svg" alt="Main" />
         Main
       </NavLink>
       <NavLink to="/cart" className={styles.link}>
-        <img src="/cart-icon.svg" alt="Menu icon" />
+        <img src="/cart-icon.svg" alt="Menu" />
         Cart{' '}
         <span className={styles.cartCount}>
           {items.reduce((acc, item) => acc + item.count, 0)}

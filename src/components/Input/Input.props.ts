@@ -1,10 +1,10 @@
 import React, { InputHTMLAttributes, RefAttributes } from 'react';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isValid?: boolean;
 }
 
-export interface InputType
+export interface IInputType
   extends React.ForwardRefExoticComponent<
-    InputProps & RefAttributes<HTMLInputElement>
+    IInputProps & RefAttributes<HTMLInputElement>
   > {}

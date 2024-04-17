@@ -13,7 +13,7 @@ function User() {
 
   return (
     <div className={styles.user}>
-      <img className={styles.avatar} src="/avatar.jpg" alt="Avatar icon" />
+      <img className={styles.avatar} src="/avatar.jpg" alt="Avatar" />
       <div className={styles.name}>{profile?.name ?? ''}</div>
       <div className={styles.email}>{profile?.email ?? ''}</div>
     </div>

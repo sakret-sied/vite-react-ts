@@ -1,4 +1,4 @@
-export interface CartItemProps {
+export interface ICartItemProps {
   id: number;
   name: string;
   image: string;

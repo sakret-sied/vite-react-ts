@@ -1,11 +1,12 @@
-import { CartItemProps } from './CartItem.props.ts';
+import { ICartItemProps } from './CartItem.props.ts';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store/store.ts';
 import { MouseEvent } from 'react';
 import { cartActions } from '../../store/cart.slice.ts';
 import styles from './CartItem.module.css';
+import cyrillicToTranslit from 'cyrillic-to-translit-js';
 
-function CartItem(props: CartItemProps) {
+function CartItem(props: ICartItemProps) {
   const { id, name, image, price, count } = props;
   const dispatch = useDispatch<AppDispatch>();
 
@@ -29,8 +30,10 @@ function CartItem(props: CartItemProps) {
         style={{ backgroundImage: `url('${image}')` }}
       ></div>
       <div className={styles.description}>
-        <div className={styles.name}>{name}</div>
-        <div className={styles.price}>{price}&nbsp;₽</div>
+        <div className={styles.name}>
+          {cyrillicToTranslit().transform(name)}
+        </div>
+        <div className={styles.price}>{price}&nbsp;$</div>
       </div>
       <div className={styles.actions}>
         <button className={styles.minus} onClick={decreaseHandler}>

@@ -1,5 +1,5 @@
-import { ItemAPI } from '../../interfaces/API.ts';
+import { IItemAPI } from '../../interfaces/API.ts';
 
-export interface ItemsListProps {
-  items: ItemAPI[];
+export interface IItemsListProps {
+  items: IItemAPI[];
 }

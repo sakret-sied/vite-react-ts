@@ -1,10 +1,12 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { ItemAPI, ProfileAPI, TokenAPI } from '../interfaces/API.ts';
-import { RegisterFields } from '../interfaces/RegisterForm.ts';
-import { LoginFields } from '../interfaces/LoginForm.ts';
-import { ProfileFields } from '../interfaces/Profile.ts';
+import { IItemAPI, IProfileAPI, ITokenAPI } from '../interfaces/API.ts';
+import { IRegisterFields } from '../interfaces/RegisterForm.ts';
+import { ILoginFields } from '../interfaces/LoginForm.ts';
+import { IProfileFields } from '../interfaces/Profile.ts';
 import { AxiosMethod } from '../enums/AxiosMethod.ts';
-import { AxiosMethods } from '../types/AxiosMethods.ts';
+import { TAxiosMethods } from '../types/AxiosMethods.ts';
+import { ICartItem } from '../interfaces/CartState.ts';
+import { TToken } from '../types/Token.ts';
 
 export const PREFIX = 'https://purpleschool.ru/pizza-api-demo';
 
@@ -19,7 +21,7 @@ async function timer(seconds: number): Promise<void> {
 async function baseAction<P, R>(
   url: string,
   params: AxiosRequestConfig<P> | P | undefined = undefined,
-  method: AxiosMethods = AxiosMethod.get,
+  method: TAxiosMethods = AxiosMethod.get,
   secondsDelay: number = 0.2
 ): Promise<R> {
   await timer(secondsDelay);
@@ -28,7 +30,7 @@ async function baseAction<P, R>(
 }
 
 export function getItemsAction(name: string) {
-  return baseAction<{ name: string }, ItemAPI[]>('/products', {
+  return baseAction<{ name: string }, IItemAPI[]>('/products', {
     params: {
       name: name
     }
@@ -36,25 +38,39 @@ export function getItemsAction(name: string) {
 }
 
 export function getItemByIdAction(id: number) {
-  return baseAction<undefined, ItemAPI>(`/products/${id}`);
+  return baseAction<undefined, IItemAPI>(`/products/${id}`);
 }
 
-export function loginAction(fields: LoginFields) {
-  return baseAction<LoginFields, TokenAPI>(
+export function loginAction(fields: ILoginFields) {
+  return baseAction<ILoginFields, ITokenAPI>(
     `/auth/login`,
     fields,
     AxiosMethod.post
   );
 }
 
-export function registerAction(fields: RegisterFields) {
-  return baseAction<RegisterFields, TokenAPI>(
+export function registerAction(fields: IRegisterFields) {
+  return baseAction<IRegisterFields, ITokenAPI>(
     `/auth/register`,
     fields,
     AxiosMethod.post
   );
 }
 
-export function profileAction(fields: ProfileFields) {
-  return baseAction<ProfileFields, ProfileAPI>(`/user/profile`, fields);
+export function profileAction(fields: IProfileFields) {
+  return baseAction<IProfileFields, IProfileAPI>(`/user/profile`, fields);
+}
+
+export function orderAction(items: ICartItem[], jwt: TToken) {
+  return axios.post(
+    `${PREFIX}/order`,
+    {
+      products: items
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    }
+  );
 }

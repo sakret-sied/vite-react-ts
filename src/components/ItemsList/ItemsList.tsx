@@ -1,12 +1,12 @@
 import ProductCard from '../ProductCard/ProductCard.tsx';
-import { ItemsListProps } from './ItemsList.props.ts';
-import { ItemAPI } from '../../interfaces/API.ts';
+import { IItemsListProps } from './ItemsList.props.ts';
+import { IItemAPI } from '../../interfaces/API.ts';
 import styles from './ItemList.module.css';
 
-function ItemsList({ items }: ItemsListProps) {
+function ItemsList({ items }: IItemsListProps) {
   return (
     <div className={styles.wrapper}>
-      {items.map((p: ItemAPI) => (
+      {items.map((p: IItemAPI) => (
         <ProductCard
           key={p.id}
           id={p.id}

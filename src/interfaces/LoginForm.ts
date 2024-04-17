@@ -1,11 +1,11 @@
 import { FormEvent } from 'react';
 
-export interface LoginFields {
+export interface ILoginFields {
   email: string;
   password: string;
 }
 
-export interface LoginEventValues {
+export interface ILoginEventValues {
   email: {
     value: string;
   };
@@ -14,6 +14,6 @@ export interface LoginEventValues {
   };
 }
 
-export interface LoginEvent<T = Element> extends FormEvent<T> {
-  target: EventTarget & LoginEventValues;
+export interface ILoginEvent<T = Element> extends FormEvent<T> {
+  target: EventTarget & ILoginEventValues;
 }

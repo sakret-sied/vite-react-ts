@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RegisterEvent } from '../../interfaces/RegisterForm.ts';
+import { IRegisterEvent } from '../../interfaces/RegisterForm.ts';
 import { useLoginCheck } from '../../hooks/useLoginCheck.ts';
 import { AppDispatch, RootState } from '../../store/store.ts';
 import { userActions } from '../../store/user.slice.ts';
@@ -16,7 +16,7 @@ function RegisterPage() {
   useLoginCheck();
 
   const submitHandler = async (
-    e: RegisterEvent<HTMLFormElement>
+    e: IRegisterEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     dispatch(userActions.clearError());

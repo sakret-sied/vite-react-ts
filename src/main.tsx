@@ -13,6 +13,7 @@ import ErrorPage from './pages/Error/ErrorPage.tsx';
 import ItemPage from './pages/Item/ItemPage.tsx';
 import LoginPage from './pages/Login/LoginPage.tsx';
 import RegisterPage from './pages/Register/RegisterPage.tsx';
+import SuccessPage from './pages/Success/SuccessPage.tsx';
 
 const Main = lazy(() => import('./pages/Main/MainPage.tsx'));
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             <Main />
           </Suspense>
         )
+      },
+      {
+        path: '/success',
+        element: <SuccessPage />
       },
       {
         path: 'cart',

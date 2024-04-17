@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginEvent } from '../../interfaces/LoginForm.ts';
+import { ILoginEvent } from '../../interfaces/LoginForm.ts';
 import { AppDispatch, RootState } from '../../store/store.ts';
 import { userActions } from '../../store/user.slice.ts';
 import { loginThunk } from '../../store/user.thunks.ts';
@@ -16,7 +16,7 @@ function LoginPage() {
   useLoginCheck();
 
   const submitHandler = async (
-    e: LoginEvent<HTMLFormElement>
+    e: ILoginEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     dispatch(userActions.clearError());

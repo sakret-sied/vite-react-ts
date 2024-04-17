@@ -1,4 +1,4 @@
-import { ButtonProps } from './Button.props';
+import { IButtonProps } from './Button.props';
 import styles from './Button.module.css';
 
 function Button({
@@ -6,7 +6,7 @@ function Button({
   appearance = 'small',
   className = '',
   onClick = () => {}
-}: ButtonProps) {
+}: IButtonProps) {
   let classes: string = `${styles.button} ${styles.accent}`;
   classes += appearance === 'big' ? ` ${styles.big}` : '';
   classes += appearance === 'small' ? ` ${styles.small}` : '';

@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { ActionAPI, ProfileAPI, TokenAPI } from '../interfaces/API.ts';
-import { LoginFields } from '../interfaces/LoginForm.ts';
-import { ProfileFields } from '../interfaces/Profile.ts';
-import { RegisterFields } from '../interfaces/RegisterForm.ts';
+import { IActionAPI, IProfileAPI, ITokenAPI } from '../interfaces/API.ts';
+import { ILoginFields } from '../interfaces/LoginForm.ts';
+import { IProfileFields } from '../interfaces/Profile.ts';
+import { IRegisterFields } from '../interfaces/RegisterForm.ts';
 import { loginAction, profileAction, registerAction } from '../services/API.ts';
 
-const basicThunk = <P, R>(prefix: string, func: ActionAPI<P, R>) =>
+const basicThunk = <P, R>(prefix: string, func: IActionAPI<P, R>) =>
   createAsyncThunk<R | undefined, P>(prefix, async (params: P) => {
     try {
       return await func(params);
@@ -17,17 +17,17 @@ const basicThunk = <P, R>(prefix: string, func: ActionAPI<P, R>) =>
     }
   });
 
-export const loginThunk = basicThunk<LoginFields, TokenAPI>(
+export const loginThunk = basicThunk<ILoginFields, ITokenAPI>(
   'user/login',
   loginAction
 );
 
-export const registerThunk = basicThunk<RegisterFields, TokenAPI>(
+export const registerThunk = basicThunk<IRegisterFields, ITokenAPI>(
   'user/register',
   registerAction
 );
 
-export const profileThunk = basicThunk<ProfileFields, ProfileAPI>(
+export const profileThunk = basicThunk<IProfileFields, IProfileAPI>(
   'user/profile',
   profileAction
 );

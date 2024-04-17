@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState } from '../interfaces/UserState.ts';
+import { IUserState } from '../interfaces/UserState.ts';
 import { loadState } from './storage.ts';
 import { loginThunk, profileThunk, registerThunk } from './user.thunks.ts';
 
 export const JWT_KEY = 'jwt';
 
-const initialState: UserState = {
-  jwt: loadState<UserState>(JWT_KEY)?.jwt ?? null,
+const initialState: IUserState = {
+  jwt: loadState<IUserState>(JWT_KEY)?.jwt ?? null,
   error: null,
   profile: null
 };

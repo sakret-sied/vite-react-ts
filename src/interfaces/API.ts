@@ -1,4 +1,4 @@
-export interface ItemAPI {
+export interface IItemAPI {
   id: number;
   name: string;
   price: number;
@@ -7,11 +7,11 @@ export interface ItemAPI {
   rating: number;
 }
 
-export interface TokenAPI {
+export interface ITokenAPI {
   access_token: string;
 }
 
-export interface ProfileAPI {
+export interface IProfileAPI {
   id: number;
   email: string;
   passwordHash: string;
@@ -21,6 +21,6 @@ export interface ProfileAPI {
   phone: string;
 }
 
-export interface ActionAPI<F, R> {
+export interface IActionAPI<F, R> {
   (fields: F): Promise<R>;
 }

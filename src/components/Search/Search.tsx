@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
-import { SearchProps, SearchType } from './Search.props';
+import { ISearchProps, ISearchType } from './Search.props';
 import styles from './Search.module.css';
 
-const Search: SearchType = forwardRef<HTMLInputElement, SearchProps>(
+const Search: ISearchType = forwardRef<HTMLInputElement, ISearchProps>(
   function Input(
-    { isValid = true, ...props }: SearchProps,
+    { isValid = true, ...props }: ISearchProps,
     ref: React.ForwardedRef<HTMLInputElement>
   ) {
     let classes: string = styles.search;

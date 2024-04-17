@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
-import { InputProps, InputType } from './Input.props';
+import { IInputProps, IInputType } from './Input.props';
 import styles from './Input.module.css';
 
-const Input: InputType = forwardRef<HTMLInputElement, InputProps>(
+const Input: IInputType = forwardRef<HTMLInputElement, IInputProps>(
   function Input(
-    { isValid = true, ...props }: InputProps,
+    { isValid = true, ...props }: IInputProps,
     ref: React.ForwardedRef<HTMLInputElement>
   ) {
     let classes: string = styles.input;

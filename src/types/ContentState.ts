@@ -1,19 +1,22 @@
 import React from 'react';
-import { ItemAPI } from '../interfaces/API.ts';
+import { IItemAPI } from '../interfaces/API.ts';
 
-export type ItemsState = [
-  ItemAPI[],
-  React.Dispatch<React.SetStateAction<ItemAPI[]>>
+export type TItemsState = [
+  IItemAPI[],
+  React.Dispatch<React.SetStateAction<IItemAPI[]>>
 ];
 
-export type IsLoadingState = [
+export type TIsLoadingState = [
   boolean,
   React.Dispatch<React.SetStateAction<boolean>>
 ];
 
-export type ErrorState = [string, React.Dispatch<React.SetStateAction<string>>];
+export type TErrorState = [
+  string,
+  React.Dispatch<React.SetStateAction<string>>
+];
 
-export type FilterState = [
+export type TFilterState = [
   string,
   React.Dispatch<React.SetStateAction<string>>
 ];

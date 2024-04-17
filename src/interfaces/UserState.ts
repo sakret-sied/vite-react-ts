@@ -1,8 +1,8 @@
-import { ProfileAPI } from './API.ts';
-import { Token } from '../types/Token.ts';
+import { IProfileAPI } from './API.ts';
+import { TToken } from '../types/Token.ts';
 
-export interface UserState {
-  jwt: Token;
+export interface IUserState {
+  jwt: TToken;
   error: string | null;
-  profile: ProfileAPI | null;
+  profile: IProfileAPI | null;
 }

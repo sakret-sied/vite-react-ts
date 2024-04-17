@@ -1,7 +1,7 @@
-import { Token } from '../types/Token.ts';
+import { TToken } from '../types/Token.ts';
 
-export interface ProfileFields {
+export interface IProfileFields {
   headers: {
-    Authorization: `Bearer ${Token}`;
+    Authorization: `Bearer ${TToken}`;
   };
 }

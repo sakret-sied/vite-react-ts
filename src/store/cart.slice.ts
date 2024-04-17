@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CartState } from '../interfaces/CartState.ts';
+import { ICartState } from '../interfaces/CartState.ts';
 import { loadState } from './storage.ts';
 
 export const CART_KEY = 'cart';
 
-const initialState: CartState = {
-  items: loadState<CartState>(CART_KEY)?.items ?? []
+const initialState: ICartState = {
+  items: loadState<ICartState>(CART_KEY)?.items ?? []
 };
 
 export const cartSlice = createSlice({
@@ -43,6 +43,9 @@ export const cartSlice = createSlice({
     },
     delete: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((i) => i.id !== action.payload);
+    },
+    clean: (state) => {
+      state.items = [];
     }
   }
 });

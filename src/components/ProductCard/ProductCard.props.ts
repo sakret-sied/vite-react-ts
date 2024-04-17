@@ -1,4 +1,4 @@
-export interface ProductCardProps {
+export interface IProductCardProps {
   id: number;
   title: string;
   description: string;

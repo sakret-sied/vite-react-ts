@@ -1,13 +1,15 @@
 import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
-import { ItemAPI } from '../../interfaces/API.ts';
+import { IItemAPI } from '../../interfaces/API.ts';
 
 function ItemPage() {
-  const { data } = useLoaderData() as { data: ItemAPI };
+  const { data } = useLoaderData() as { data: IItemAPI };
 
   return (
     <Suspense fallback={<>Loading...</>}>
-      <Await resolve={data}>{(data: ItemAPI) => <>Item - {data.name}</>}</Await>
+      <Await resolve={data}>
+        {(data: IItemAPI) => <>Item - {data.name}</>}
+      </Await>
     </Suspense>
   );
 }

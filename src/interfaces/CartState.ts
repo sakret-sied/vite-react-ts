@@ -1,8 +1,8 @@
-export interface CartItem {
+export interface ICartItem {
   id: number;
   count: number;
 }
 
-export interface CartState {
-  items: CartItem[];
+export interface ICartState {
+  items: ICartItem[];
 }
